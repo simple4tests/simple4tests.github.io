@@ -2,6 +2,8 @@
 layout: default
 ---
 
+*simple4tests aims to provide methodology and simple tools to support developers and testers while building maintainable and reliable automated tests*
+
 ## WebDriverInteractions
 
 WebDriverInteractions is a set of functions you can integrate in your selenium test automation framework
