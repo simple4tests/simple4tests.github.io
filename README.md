@@ -9,7 +9,8 @@ to manage automaticaly several technical stuff like waits, scrolling and much mo
 
 **You have less to care about it, keeping the code clean and focused on the test purpose**
 
-![Example of automation using native Selenium](./assets/images/se.png)![Same example using WebDriver Interactions](./assets/images/wdi.png)
+![se](https://simple4tests.github.io/interactions-webdriver/assets/images/01_se.png)
+![wdi](https://simple4tests.github.io/interactions-webdriver/assets/images/01_wdi.png)
 
 For more information, see [the WebDriver Interactions documentation](https://simple4tests.github.io/interactions-webdriver/)
 
