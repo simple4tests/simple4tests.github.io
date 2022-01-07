@@ -1,6 +1,5 @@
 ---
 layout: default
-title: Simple for Tests
 ---
 
 ### WebDriverInteractions is a set of functions you can integrate in your selenium test automation framework to manage automaticaly several technical stuff like waits, scrolling and much more
