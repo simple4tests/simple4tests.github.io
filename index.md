@@ -12,6 +12,17 @@ TOTO
 WebDriverInteractions is a set of functions you can integrate in your selenium test automation framework
 to manage automaticaly several technical stuff like waits, scrolling and much more.
 
+{% include ext_jv1b.md %}
+
+TITI
+
+```java
+public int titi() {
+    return 5;
+}
+```
+
+
 **You have less to care about it, keeping the code clean and focused on the test purpose**
 
 ![se](https://simple4tests.github.io/interactions-webdriver/assets/images/01_se.png)
