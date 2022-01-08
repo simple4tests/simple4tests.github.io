@@ -1,8 +1,8 @@
----
----
+*ceci est un autre texte
 
 ```java
-public void toto() {
-    return;
+public int toto() {
+    return 4;
 }
 ```
+tout va bien
