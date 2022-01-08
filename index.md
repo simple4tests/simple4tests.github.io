@@ -21,13 +21,5 @@ to manage automaticaly several technical stuff like waits, scrolling and much mo
 
 For more information, see [the WebDriver Interactions documentation](https://simple4tests.github.io/interactions-webdriver/)
 
-TOTO
-{% include _includes/ext_jv2.md %}
-TITI
-{% include _includes/ext_jv2b.html %}
-
-TITI
-{% include ext_jvb.html %}
-
 ### Support or Contact
 Having trouble or questions? Contact us at simple4tests@gmail.com
