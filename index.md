@@ -18,8 +18,8 @@ automaticaly several technical stuff like waits, scrolling and much more.
 <td>wdi</td>
 </tr>
 <tr>
-<td>{% include ext_jv1b.md %}</td>
-<td>{% include ext_jv2b.md %}</td>
+<td> {% include ext_jv1b.md %} </td>
+<td> {% include ext_jv2b.md %} </td>
 </tr>
 </table>
 
