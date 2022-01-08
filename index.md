@@ -7,8 +7,6 @@ layout: default
 ## WebDriverInteractions
 
 TOTO
-{% include ext_jv2.md %}
-TITI
 {% include ext_jv2b.html %}
 
 WebDriverInteractions is a set of functions you can integrate in your selenium test automation framework
