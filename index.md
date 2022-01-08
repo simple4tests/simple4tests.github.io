@@ -4,12 +4,6 @@ layout: default
 
 *simple4tests aims to provide methodology and simple tools to support developers and testers while building maintainable and reliable automated tests*
 
-TOTO
-{% include ext_jv.md %}
-TITI
-{% include ext_jvb.html %}
-
-
 ## WebDriverInteractions
 
 TOTO
@@ -31,6 +25,9 @@ TOTO
 {% include _includes/ext_jv2.md %}
 TITI
 {% include _includes/ext_jv2b.html %}
+
+TITI
+{% include ext_jvb.html %}
 
 ### Support or Contact
 Having trouble or questions? Contact us at simple4tests@gmail.com
