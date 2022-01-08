@@ -1,3 +1,7 @@
+layouts_dir: _layouts
+kramdown:
+  syntax_highlighter: coderay
 title: Simple for Tests
-markdown: GFM
 theme: jekyll-theme-cayman
+
+
