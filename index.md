@@ -12,19 +12,7 @@ automaticaly several technical stuff like waits, scrolling and much more.
 
 **You have less to care about it, keeping the code clean and focused on the test purpose**
 
-<table>
-<tr>
-<td>selenium</td>
-<td>wdi</td>
-</tr>
-<tr>
-<td> {% include ext_jv1b.md %} </td>
-<td> {% include ext_jv2b.md %} </td>
-</tr>
-</table>
-
-![se](https://simple4tests.github.io/interactions-webdriver/assets/images/01_se.png)
-![wdi](https://simple4tests.github.io/interactions-webdriver/assets/images/01_wdi.png)
+![se_vs_wdi](assets/images/se_vs_wdi.png)
 
 For more information,
 see [the WebDriver Interactions documentation](https://simple4tests.github.io/interactions-webdriver/)
