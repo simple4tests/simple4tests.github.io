@@ -1,6 +1,4 @@
-kramdown:
-  syntax_highlighter: coderay
 title: Simple for Tests
-theme: jekyll-theme-cayman
-
-
+remote_theme: pages-themes/cayman@v0.2.0
+plugins:
+  - jekyll-remote-theme
