@@ -12,13 +12,16 @@ automaticaly several technical stuff like waits, scrolling and much more.
 
 **You have less to care about it, keeping the code clean and focused on the test purpose**
 
-{% include ext_jv1b.md %}
-
-| selenium | wdi |
-| -------- | --- |
-| {% include ext_jv1b.md %} | {% include ext_jv2b.md %} |
-
-{% include ext_jv2b.md %}
+<table>
+<tr>
+<td>selenium</td>
+<td>wdi</td>
+</tr>
+<tr>
+<td>{% include ext_jv1b.md %}</td>
+<td>{% include ext_jv2b.md %}</td>
+</tr>
+</table>
 
 ![se](https://simple4tests.github.io/interactions-webdriver/assets/images/01_se.png)
 ![wdi](https://simple4tests.github.io/interactions-webdriver/assets/images/01_wdi.png)
