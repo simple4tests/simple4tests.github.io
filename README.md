@@ -8,9 +8,9 @@ automaticaly several technical stuff like waits, scrolling and much more.
 
 **You have less to care about it, keeping the code clean and focused on the test purpose**
 
-![se_vs_wdi](https://simple4tests.github.io/interactions-webdriver/assets/images/se_vs_wdi.png)
+![se_vs_wdi](assets/images/se_vs_wdi.png)
 
-For more information, see [the WebDriver Interactions documentation](https://simple4tests.github.io/interactions-webdriver/)
+For more information, see [the WebDriver Interactions documentation](https://simple4tests.github.io/webdriverinteractions/webdriverinteractions.html)
 
 ### Support and Contact
 Having trouble or questions? Contact us at simple4tests@gmail.com

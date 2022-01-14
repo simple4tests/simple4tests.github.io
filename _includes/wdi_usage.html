@@ -1,29 +1,31 @@
-<h3>Usage</h3>
-1. Add dependency on your pom.xml file
+<section>
+    <h3>Usage</h3>
+    1. Add dependency on your pom.xml file
 
-{% highlight java %}
-<dependency>
-    <groupId>io.github.simple4tests</groupId>
-    <artifactId>interactions-webdriver</artifactId>
-    <version>...</version>
-</dependency>
-{% endhighlight %}
+    {% highlight java %}
+    <dependency>
+        <groupId>io.github.simple4tests</groupId>
+        <artifactId>interactions-webdriver</artifactId>
+        <version>...</version>
+    </dependency>
+    {% endhighlight %}
 
-2. Instanciate a WebDriverInteractions object
+    2. Instanciate a WebDriverInteractions object
 
-{% highlight java %}
-WebDriver driver;
-...
-driver = new ChromeDriver();
-...
-WebDriverInteractions ui = new WebDriverInteractions(driver);
-{% endhighlight %}
+    {% highlight java %}
+    WebDriver driver;
+    ...
+    driver = new ChromeDriver();
+    ...
+    WebDriverInteractions ui = new WebDriverInteractions(driver);
+    {% endhighlight %}
 
-3. Just use it
+    3. Just use it
 
-{% highlight java %}
-ui.browser.navigateTo(...);
-ui.click(...);
-ui.set(...);
-...
-{% endhighlight %}
+    {% highlight java %}
+    ui.browser.navigateTo(...);
+    ui.click(...);
+    ui.set(...);
+    ...
+    {% endhighlight %}
+</section>
