@@ -8,7 +8,7 @@ automaticaly several technical stuff like waits, scrolling and much more.
 
 **You have less to care about it, keeping the code clean and focused on the test purpose**
 
-![se_vs_wdi](assets/images/se_vs_wdi.png)
+![se_vs_wdi](assets/images/se_vs_wdi_01.png)
 
 For more information, see [the WebDriver Interactions documentation](https://simple4tests.github.io/webdriverinteractions/webdriverinteractions.html)
 

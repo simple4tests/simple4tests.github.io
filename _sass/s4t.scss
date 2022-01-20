@@ -34,6 +34,24 @@ body {
   color: $body-text-color;
 }
 
+a {
+  color: $body-link-color;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+hr {
+    height: 0.2em;
+    padding: 0;
+    margin: 1rem 0;
+    background-color: #b4188d;
+    border: 0;
+    border-radius: 5px;
+  }
+
 #skip-to-content {
   height: 1px;
   width: 1px;
@@ -49,15 +67,6 @@ body {
     width: auto;
     background: invert($body-link-color);
     outline: thick solid invert($body-link-color);
-  }
-}
-
-a {
-  color: $body-link-color;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
   }
 }
 
@@ -122,42 +131,77 @@ a {
   @include small {
     padding: 2rem 1rem;
   }
+
+    h1 {
+      margin-top: 0;
+      margin-bottom: 0.1rem;
+
+      @include large {
+        font-size: 3.25rem;
+      }
+
+      @include medium {
+        font-size: 2.25rem;
+      }
+
+      @include small {
+        font-size: 1.75rem;
+      }
+    }
+
+    h2 {
+      margin-bottom: 2rem;
+      font-weight: normal;
+      opacity: 0.7;
+
+      @include large {
+        font-size: 1.25rem;
+      }
+
+      @include medium {
+        font-size: 1.15rem;
+      }
+
+      @include small {
+        font-size: 1rem;
+      }
+    }
 }
 
-.project-name {
-  margin-top: 0;
-  margin-bottom: 0.1rem;
+// .project-name {
+//   margin-top: 0;
+//   margin-bottom: 0.1rem;
+//
+//   @include large {
+//     font-size: 3.25rem;
+//   }
+//
+//   @include medium {
+//     font-size: 2.25rem;
+//   }
+//
+//   @include small {
+//     font-size: 1.75rem;
+//   }
+// }
 
-  @include large {
-    font-size: 3.25rem;
-  }
-
-  @include medium {
-    font-size: 2.25rem;
-  }
-
-  @include small {
-    font-size: 1.75rem;
-  }
-}
-
-.project-tagline {
-  margin-bottom: 2rem;
-  font-weight: normal;
-  opacity: 0.7;
-
-  @include large {
-    font-size: 1.25rem;
-  }
-
-  @include medium {
-    font-size: 1.15rem;
-  }
-
-  @include small {
-    font-size: 1rem;
-  }
-}
+// .project-tagline {
+//   margin-bottom: 2rem;
+//   font-weight: normal;
+//   opacity: 0.7;
+//
+//   @include large {
+//     font-size: 1.25rem;
+//   }
+//
+//   @include medium {
+//     font-size: 1.15rem;
+//   }
+//
+//   @include small {
+//     font-size: 1rem;
+//   }
+// }
 
 .main-content {
   word-wrap: break-word;
@@ -343,20 +387,10 @@ a {
       margin-bottom: 1rem;
     }
   }
-
-  hr {
-    height: 2px;
-    padding: 0;
-    margin: 1rem 0;
-    background-color: $hr-border-color;
-    border: 0;
-  }
 }
 
-.site-footer {
-  padding-top: 2rem;
-  margin-top: 2rem;
-  border-top: solid 1px $hr-border-color;
+.page-footer {
+  padding: 2rem 6rem;
 
   @include large {
     font-size: 1rem;
@@ -369,13 +403,13 @@ a {
   @include small {
     font-size: 0.9rem;
   }
-}
 
-.site-footer-owner {
-  display: block;
-  font-weight: bold;
-}
+    .site-footer-owner {
+      display: block;
+      font-weight: bold;
+    }
 
-.site-footer-credits {
-  color: $blockquote-text-color;
+    .site-footer-credits {
+      color: $blockquote-text-color;
+    }
 }
