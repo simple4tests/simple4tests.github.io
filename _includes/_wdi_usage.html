@@ -29,3 +29,19 @@
     ...
     {% endhighlight %}
 </section>
+<br>
+<section>
+    <h4>Alternative</h4>
+    <p>Even WebDriverInteractions object can be used strait foraward as shown previuosly, the recommendation is, in your
+        test project, to create a class Wdi that extends WebdriverInteractions.</p>
+
+    {% highlight java %}
+    public class Wdi extends WebDriverInteractions {
+    public Wdi(WebDriver driver) { super(driver); }
+    }
+    {% endhighlight %}
+
+    <p>This way, you will be able to create your custom technical actions based on WebDriverInteractions and all
+        technical actions (custom or not) will be accessible from a single object.</p>
+</section>
+<br>
