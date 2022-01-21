@@ -17,31 +17,49 @@
     ...
     driver = new ChromeDriver();
     ...
-    WebDriverInteractions ui = new WebDriverInteractions(driver);
+    WebDriverInteractions wdi = new WebDriverInteractions(driver);
     {% endhighlight %}
 
     3. Just use it
 
     {% highlight java %}
-    ui.browser.navigateTo(...);
-    ui.click(...);
-    ui.set(...);
+    wdi.browser.navigateTo(...);
+    wdi.click(...);
+    wdi.set(...);
     ...
     {% endhighlight %}
 </section>
 <br>
 <section>
-    <h4>Alternative</h4>
-    <p>Even WebDriverInteractions object can be used strait foraward as shown previuosly, the recommendation is, in your
-        test project, to create a class Wdi that extends WebdriverInteractions.</p>
+    <h4>Recommended implementation</h4>
+    <p>Even WebDriverInteractions object can be used straight forward as shown previuosly, the recommendation is to
+        create in your project a class Wdi that extends WebdriverInteractions. This way, you will be able to easely
+        customize WebDriverInteractions creating your custom technical actions based on WebDriverInteractions.</p>
 
     {% highlight java %}
     public class Wdi extends WebDriverInteractions {
-    public Wdi(WebDriver driver) { super(driver); }
+        public Wdi(WebDriver driver) { super(driver); }
+
+        // custom technical action to select a value within a custom dropdown
+        public void selectInList(By by, String value) {... click(...); ...; click(...); ...}
     }
     {% endhighlight %}
 
-    <p>This way, you will be able to create your custom technical actions based on WebDriverInteractions and all
-        technical actions (custom or not) will be accessible from a single object.</p>
+    <p>Then instanciate your newly class Wdi and you are ready to play with WebDriverInteractions functions as well as
+        your custom functions. All ot them from a single object.</p>
+
+    {% highlight java %}
+    WebDriver driver;
+    ...
+    driver = new ChromeDriver();
+    ...
+    Wdi wdi = new Wdi(driver);
+    wdi.browser.navigateTo(...);
+    wdi.click(...);
+    wdi.set(...);
+    wdi.selectInList(by, value);
+    ...
+    {% endhighlight %}
+
 </section>
 <br>
