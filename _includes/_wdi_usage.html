@@ -1,65 +1,59 @@
-<section>
-    <h3>Usage</h3>
-    1. Add dependency on your pom.xml file
+<h3>Usage</h3>
+1. Add dependency on your pom.xml file
 
-    {% highlight java %}
-    <dependency>
-        <groupId>io.github.simple4tests</groupId>
-        <artifactId>interactions-webdriver</artifactId>
-        <version>...</version>
-    </dependency>
-    {% endhighlight %}
+{% highlight java %}
+<dependency>
+    <groupId>io.github.simple4tests</groupId>
+    <artifactId>interactions-webdriver</artifactId>
+    <version>...</version>
+</dependency>
+{% endhighlight %}
 
-    2. Instanciate a WebDriverInteractions object
+2. Instanciate a WebDriverInteractions object
 
-    {% highlight java %}
-    WebDriver driver;
-    ...
-    driver = new ChromeDriver();
-    ...
-    WebDriverInteractions wdi = new WebDriverInteractions(driver);
-    {% endhighlight %}
+{% highlight java %}
+WebDriver driver;
+...
+driver = new ChromeDriver();
+...
+WebDriverInteractions wdi = new WebDriverInteractions(driver);
+{% endhighlight %}
 
-    3. Just use it
+3. Just use it
 
-    {% highlight java %}
-    wdi.browser.navigateTo(...);
-    wdi.click(...);
-    wdi.set(...);
-    ...
-    {% endhighlight %}
-</section>
-<br>
-<section>
-    <h4>Recommended implementation</h4>
-    <p>Even WebDriverInteractions object can be used straight forward as shown previuosly, the recommendation is to
-        create in your project a class Wdi that extends WebdriverInteractions. This way, you will be able to easely
-        customize WebDriverInteractions creating your custom technical actions based on WebDriverInteractions.</p>
+{% highlight java %}
+wdi.browser.navigateTo(...);
+wdi.click(...);
+wdi.set(...);
+...
+{% endhighlight %}
 
-    {% highlight java %}
-    public class Wdi extends WebDriverInteractions {
-        public Wdi(WebDriver driver) { super(driver); }
+<h4>Recommended implementation</h4>
+<p>Even WebDriverInteractions object can be used straight forward as shown previuosly, the recommendation is to
+    create in your project a class Wdi that extends WebdriverInteractions. This way, you will be able to easely
+    customize WebDriverInteractions creating your custom technical actions based on WebDriverInteractions.</p>
 
-        // custom technical action to select a value within a custom dropdown
-        public void selectInList(By by, String value) {... click(...); ...; click(...); ...}
-    }
-    {% endhighlight %}
+{% highlight java %}
+public class Wdi extends WebDriverInteractions {
+public Wdi(WebDriver driver) { super(driver); }
 
-    <p>Then instanciate your newly class Wdi and you are ready to play with WebDriverInteractions functions as well as
-        your custom functions. All ot them from a single object.</p>
+// custom technical action to select a value within a custom dropdown
+public void selectInList(By by, String value) {... click(...); ...; click(...); ...}
+}
+{% endhighlight %}
 
-    {% highlight java %}
-    WebDriver driver;
-    ...
-    driver = new ChromeDriver();
-    ...
-    Wdi wdi = new Wdi(driver);
-    wdi.browser.navigateTo(...);
-    wdi.click(...);
-    wdi.set(...);
-    wdi.selectInList(by, value);
-    ...
-    {% endhighlight %}
+<p>Then instanciate your newly class Wdi and you are ready to play with WebDriverInteractions functions as well as
+    your custom functions. All ot them from a single object.</p>
 
-</section>
-<br>
+{% highlight java %}
+WebDriver driver;
+...
+driver = new ChromeDriver();
+...
+Wdi wdi = new Wdi(driver);
+wdi.browser.navigateTo(...);
+wdi.click(...);
+wdi.set(...);
+wdi.selectInList(by, value);
+...
+{% endhighlight %}

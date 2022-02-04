@@ -6,108 +6,87 @@ description: Enforce maintainability of automated tests
 
 {% include _method_overview.html %}
 <br>
-<section>
-    <p><b>Jobs are created in your CI/CD server (ex are jenkins, bamboo) and are responsible for :</b></p>
-    <ul>
-        <li>Scheduling executions</li>
-        <li>Setting execution context, usually application environnement and browser</li>
-        <li>Filtering tests to be executed</li>
-    </ul>
-    <p>In commun implementations they are only one entity so called automated tests.
-        Gherkin introduce a first idea of splitting tests and automaton, however the goal is provide a translator from
-        native langage to executable code.
-        Therefore, when we look into the code itself, we notice that tests concepts are mixed with automaton concepts.
-    </p>
-    <p>Having a place for everything and putting everything in its place is one of the keys to achieve maintainable
-        automated tests.</p>
-    <p><b>Tests concept includes</b></p>
-    <ul>
-        <li>test objectives (what do we want to check)</li>
-        <li>test data (what data to use)</li>
-        <li>knowledge about WHAT the application can do (available features like login, create order, ...)</li>
-        <li>knowledge about expected results (when doing 2 + 2 we expect the result to be 4)</li>
-    </ul>
-    <p><b>Automaton concept includes</b></p>
-    <ul>
-        <li>Application configuration values (ex: the environnement X has for url 'https://...')</li>
-        <li>Application data definition (ex: an adress is made of a street number, a street name, a post code and a city
-            name)
-        </li>
-        <li>knowledge about the elements of the application to interact with (ex: input fieds, button, ...)</li>
-        <li>knowledge about HOW to interact with the elements of the application (ex: how to select a value within a
-            dropdown list)
-        </li>
-        <li>knowledge about HOW to perform features (ex with login: For the data we need a user name and a password. On
-            the action side, we set the username, then the password and then click the connection button)
-        </li>
-    </ul>
-</section>
-<br>
+<p><b>Jobs are created in your CI/CD server (ex are jenkins, bamboo) and are responsible for :</b></p>
+<ul>
+    <li>Scheduling executions</li>
+    <li>Setting execution context, usually application environnement and browser</li>
+    <li>Filtering tests to be executed</li>
+</ul>
+<p>In commun implementations they are only one entity so called automated tests.
+    Gherkin introduce a first idea of splitting tests and automaton, however the goal is provide a translator from
+    native langage to executable code.
+    Therefore, when we look into the code itself, we notice that tests concepts are mixed with automaton concepts.</p>
+<p>Having a place for everything and putting everything in its place is one of the keys to achieve maintainable
+    automated tests.</p>
+<p><b>Tests concept includes</b></p>
+<ul>
+    <li>test objectives (what do we want to check)</li>
+    <li>test data (what data to use)</li>
+    <li>knowledge about WHAT the application can do (available features like login, create order, ...)</li>
+    <li>knowledge about expected results (when doing 2 + 2 we expect the result to be 4)</li>
+</ul>
+<p><b>Automaton concept includes</b></p>
+<ul>
+    <li>Application configuration values (ex: the environnement X has for url 'https://...')</li>
+    <li>Application data definition (ex: an adress is made of a street number, a street name, a post code and a city
+        name)
+    </li>
+    <li>knowledge about the elements of the application to interact with (ex: input fieds, button, ...)</li>
+    <li>knowledge about HOW to interact with the elements of the application (ex: how to select a value within a
+        dropdown list)
+    </li>
+    <li>knowledge about HOW to perform features (ex with login: For the data we need a user name and a password. On
+        the action side, we set the username, then the password and then click the connection button)
+    </li>
+</ul>
 <hr>
-<section>
-    <img src="/assets/images/interactions_pattern_01_init.png">
-</section>
-<br>
-<section>
-    <p>The test initialisation phase includes everything that must be prepared before running the test.
-        The job indicates what should be done and the test prepare everything. Test only need the automaton to get the
-        configuration value of the application for the environnement set by the job.</p>
-</section>
-<br>
+<img src="/assets/images/interactions_pattern_01_init.png">
+<p>The test initialisation phase includes everything that must be prepared before running the test.
+    The job indicates what should be done and the test prepare everything. Test only need the automaton to get the
+    configuration value of the application for the environnement set by the job.</p>
 <hr>
-<section>
-    <img src="/assets/images/interactions_pattern_02_action.png">
-</section>
-<br>
-<section>
-    <p>A test action consists of asking the applicaton to do something (more or less create and update data, persistant
-        or not).</p>
-    <p>When using cucumber, test is made of two parts, gherkin (tests described on natural langage) and the glue.
-        Actions are identified using 'Given' and 'When' key words. The glue step corresponding to these phrasing looks
-        like :</p>
-    <ul>
-        <li>Prepare the input data to be used to perform features in the application, using the automaton data
-            definition
-        </li>
-        <li>Ask the automaton to perform one or several features (ex: navigate to a certain page, select user creation
-            and fill user form)
-        </li>
-        <li>Optionaly, save some application output to be used later (get ID of user newly created)</li>
-    </ul>
-    <p>The automaton takes care of all interactions with the application and it is made of :</p>
-    <ul>
-        <li>Locators : location of the application elements to interact with</li>
-        <li>forms : All functional behavior of the application (includes navigation, fill forms, get data)</li>
-        <li>WebDriver Interactions : Everything about technical behaviour of the application (how to click a button, how
-            to wait on something, ...)
-        </li>
-    </ul>
-</section>
-<br>
+<img src="/assets/images/interactions_pattern_02_action.png">
+<p>A test action consists of asking the applicaton to do something (more or less create and update data, persistant
+    or not).</p>
+<p>When using cucumber, test is made of two parts, gherkin (tests described on natural langage) and the glue.
+    Actions are identified using 'Given' and 'When' key words. The glue step corresponding to these phrasing looks
+    like :</p>
+<ul>
+    <li>Prepare the input data to be used to perform features in the application, using the automaton data
+        definition
+    </li>
+    <li>Ask the automaton to perform one or several features (ex: navigate to a certain page, select user creation
+        and fill user form)
+    </li>
+    <li>Optionaly, save some application output to be used later (get ID of user newly created)</li>
+</ul>
+<p>The automaton takes care of all interactions with the application and it is made of :</p>
+<ul>
+    <li>Locators : location of the application elements to interact with</li>
+    <li>forms : All functional behavior of the application (includes navigation, fill forms, get data)</li>
+    <li>WebDriver Interactions : Everything about technical behaviour of the application (how to click a button, how
+        to wait on something, ...)
+    </li>
+</ul>
 <hr>
-<section>
-    <img src="/assets/images/interactions_pattern_03_check.png">
-</section>
-<br>
-<section>
-    <p>A test check consists of comparing a result provided by the application to an expected value</p>
-    <p>When using cucumber, checks are identified using 'Then' key word. The glue step corresponding to these phrasing looks
-        like :</p>
-    <ul>
-        <li>Optionaly, doing some navigation in the application and getting values (we may have save necessary output in an earlier step)</li>
-        <li>Compare actual value (it is the value provided by the application) to the expected value (it is the value provided by the test data)</li>
-    </ul>
-    <p>Getting values from the application includes same flow as performing features with the difference that data in the application is not created or updated, only read.</p>
-    <p><b>This concept implies that automaton knows nothing about expected values and checks. Expected values and checks are test concepts and happen in test.</b></p>
-</section>
-<br>
+<img src="/assets/images/interactions_pattern_03_check.png">
+<p>A test check consists of comparing a result provided by the application to an expected value</p>
+<p>When using cucumber, checks are identified using 'Then' key word. The glue step corresponding to these phrasing looks
+    like :</p>
+<ul>
+    <li>Optionaly, doing some navigation in the application and getting values (we may have save necessary output in an
+        earlier step)
+    </li>
+    <li>Compare actual value (it is the value provided by the application) to the expected value (it is the value
+        provided by the test data)
+    </li>
+</ul>
+<p>Getting values from the application includes same flow as performing features with the difference that data in the
+    application is not created or updated, only read.</p>
+<p><b>This concept implies that automaton knows nothing about expected values and checks. Expected values and checks are
+    test concepts and happen in test.</b></p>
 <hr>
-<section>
-    <img src="/assets/images/interactions_pattern_04_close.png">
-</section>
-<br>
-<section>
-    <p>Test closure consists of compiling tests results to prepare test report, releasing and cleaning everything that is required and pushing results to the job.</p>
-    <p>Jobs remaing accesible by project team in order to access reports and analyze results.</p>
-</section>
-<br>
+<img src="/assets/images/interactions_pattern_04_close.png">
+<p>Test closure consists of compiling tests results to prepare test report, releasing and cleaning everything that is
+    required and pushing results to the job.</p>
+<p>Jobs remaing accesible by project team in order to access reports and analyze results.</p>
