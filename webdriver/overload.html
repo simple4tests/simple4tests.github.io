@@ -4,3 +4,158 @@ title: WebDriver Overload
 description: Enforce test automation best practice
 ---
 
+<h3>Main purpose</h3>
+<p>WebDriver Overload is about introducing layers to standardize the code. On the top of it you can use provided
+    implementation or build your custom ones.</p>
+
+WebDriver Overload pagckage provides facilities to
+<ul>
+    <li>Manage browsers options</li>
+    <li>Perform (none blocking) checks</li>
+    <li>Report test details</li>
+    <li>Integrate with other frameworks</li>
+</ul>
+<hr>
+<h3>Managing browsers options</h3>
+<h4>WebDriverProvider</h4>
+<p> A simple WebDriver provider for chrome (default) and firefox supporting local and grid.</p>
+<p> For local WebDrivers [static WebDriver get(String browser, Path driverPath, String optionsAsYamlResource)] the
+    parameters are</p>
+<ul>
+    <li>String browser : Firefox or chrome, if other then it will be chrome (ex: "firefox")</li>
+    <li>Path driverPath : Path of the excutable file (ie: Paths.get("C:/dev_tools/webdriver/geckodriver.exe"))</li>
+    <li>String optionsAsYamlResource : Name of the resource file describing browser's options</li>
+</ul>
+<p> For selenium grid [static WebDriver get(String browser, URL seleniumServer, String optionsAsYamlResource)] the
+    parameters are</p>
+<ul>
+    <li>String browser : Firefox or chrome, if other then it will be chrome (ex: "firefox")</li>
+    <li>URL seleniumServer : the url of the selenium grid (ie: new URL("http://127.0.0.1:4444"))</li>
+    <li>String optionsAsYamlResource : Name of the resource file describing browser's options</li>
+</ul>
+<h4>ChromeOptionsProvider</h4>
+<p>The static get function returns a ChromeOptions object based on options given in parameter.</p>
+<p>ChromeOptionsProvider supports binary location, arguments, capabilities and extensions.</p>
+<ul>
+    <li>static ChromeOptions get() will return default Chrome options</li>
+    <li>static ChromeOptions get(String optionsAsYamlResource) will return Chrome options based on what is specified in
+        the yaml file
+    </li>
+</ul>
+<h4>FirefoxOptionsProvider</h4>
+<p>The static get function returns a ChromeOptions object based on options given in parameter.</p>
+<p>FirefoxOptionsProvider supports arguments, capabilities, preferences and profile preferences.</p>
+<ul>
+    <li>static FirefoxOptions get() will return default Firefox options</li>
+    <li>static FirefoxOptions get(String optionsAsYamlResource) will return Firefox options based on what is specified
+        in the yaml file
+    </li>
+</ul>
+<h4>Available configuration</h4>
+<ul>
+    <li>"chrome_options_default.yml" will be used as default for Chrome</li>
+    <li>"chrome_options_headless.yml" can be used for Chrome in headless mode</li>
+    <li>"firefox_options_default.yml" will be used as default for Firefox</li>
+    <li>"firefox_options_headless.yml" can be used for Firefox in headless mode</li>
+</ul>
+<hr>
+<h3>Perform (none blocking) checks</h3>
+<h4>Checks and none blocking checks?</h4>
+<p>Unit test best practices says we should check only one thing per test. Despite this is a good best practice in unit
+    testing, is it a good best practice for higher levels like UI or end-to-end automated test? ... If we are talking
+    about test objectif, the answer should definitively yes, one test has a unique test objective. Now if we think about
+    checks the answer may be different. Lets take the case were the test objective is to verify that a user can create
+    an account. To do that, the user will navigate throught few pages andthe tester want to check if the user can create
+    an account and use these opportunity to check the title of the account creation page. The question is, is it
+    efficient to write 2 test cases, one to check the title of the page and one to check the account creation?</p>
+<p>At simple4tests we think it is convenient, in this case, to write one test to check the account creation within which
+    we check the title of the page. One of the conditions to apply this kind of rules is to have a simple and clean way
+    of reporting what happens in the test. It is why, checks and reporting are related concept in webdriver-overload
+    package. In practice Webdriver-Overload provide checks functions through the Reporter object. Details on reporting
+    can be found a little lower.</p>
+<h4>How checks are performed using webDriver-Overload</h4>
+<p>Checks are made of 3 information, the name of the check, the actual value, and the expected value or expression.</p>
+<p>It consists of the following steps</p>
+<ul>
+    <li>Add a new step in the report using the name of the check</li>
+    <li>Compares the actual value with the expected expression</li>
+    <ul>
+        <li>In case of match, continue running the test</li>
+        <li>In case of no match, reports the deviation as evidence or test data, logs the deviation in an error book for
+            futhur analyse and continue running the test
+        </li>
+    </ul>
+</ul>
+<h4>Checks using Java Hamcrest Matchers</h4>
+{% highlight java %}
+reporter.addCheckData("Check page title", Automaton.getPageTitle(), Matchers.equalTo("Account creation"));
+{% endhighlight %}
+<p>This function allow to describe expected value as Hamcrest Matchers expression.</p>
+<p>Some exemples</p>
+<ul>
+    <li>Matchers.equalTo(...)</li>
+    <li>Matchers.containsStringIgnoringCase(...)</li>
+    <li>Matchers.greaterThan(...)</li>
+</ul>
+<p>Hamcrest Matchers support String, Integer, List, Object, ... A lot of documentation si available on internet.</p>
+<h4>Checks using Groovy Hamcrest Matchers</h4>
+{% highlight java %}
+reporter.addGroovyAssertThat("Check page title", Automaton.getPageTitle(), "equalTo('Account creation')");
+{% endhighlight %}
+<p>This function allow to describe expected value as Hamcrest Matchers expression. The difference is, in this way the
+    description is not a java function but a litteral. We can now describe checks on external files as String.</p>
+<p>To achieve it WebDriver Overload uses a groovy engine to evaluate the expression using 'assertThat' command.</p>
+<h4>Checks using Groovy power assertions</h4>
+{% highlight java %}
+reporter.addGroovyAssert("Check page title", String.format("'%s'.equals('Account creation')", Automaton.getPageTitle()));
+{% endhighlight %}
+<p>This function allow to describe any groovy assert expression. Previously we used an object and an expression to
+    compared with. Now we use a sinple expression.</p>
+<p>To achieve it WebDriver Overload uses a groovy engine to evaluate the expression using 'assert' command.</p>
+<hr>
+<h3>Report test details</h3>
+<p>We believe the reporting is a key success factor for test automation.</p>
+<p>There are two types of test details, everything from ghekin and the rest. There are several cucumber reporters
+    available and we recommend to use your favorite reporter for all information at gherkin level. By reporting test
+    details we mean showing additionnal usefull data about what is happening within a bdd step. Basically it is about
+    test steps, test data, test evidence and screenshots. all these information is in addition to the standard cucumber
+    reporters.</p>
+<p>WebDriver Overload commes with an abstract layer of the reporting to define common reporting functions as well as a
+    reporting implementation.</p>
+<h4>The Reporter, an abstract layer</h4>
+<p>The Reporter is an Interface object including default behaviour.</p>
+<ul>
+    <li>Error book : Functions used to collect and report deviation detected during test executions</li>
+    <li>Reporting capabilities : List of reporting functions, like reporting a step, reporting test data, ...</li>
+    <li>Checks : Default link between reporting engines and check engines</li>
+</ul>
+<h4>DummyReporter, less is nothing</h4>
+<p>This reports prints everything nowhere. It means the information is not accesible. However it can be used to manage
+    the error books and raised errors when found.</p>
+<p>Concrete implementation in <a href="https://github.com/simple4tests/wdi-ex-cucumber/tree/cucumber-dummy-reporter">wdi-ex-cucumber</a>
+    github repository, branch 'cucumber-dummy-reporter'.</p>
+<h4>SystemOutReporter, usefull logger</h4>
+<p>This reporter will report your desired information in the system out console. It can print every kind of data like
+    test steps, test data, deviations, error book. There is nothing about printscreens.</p>
+<p>Concrete implementation in <a
+        href="https://github.com/simple4tests/wdi-ex-cucumber/tree/cucumber-systemout-reporter">wdi-ex-cucumber</a>
+    github repository, branch 'cucumber-systemout-reporter'.</p>
+<h4>SerenityReporter, all in one reporter</h4>
+<p>Serenity reporter includes everything you need ... and much more. In addition to standard gherkin information
+    Serenity reporter provides capabilities to add step informations, step data, screenshots, tags, requirements,
+    capabilities, ...</p>
+<p>Concrete implementation in <a href="https://github.com/simple4tests/wdi-ex-cucumber/tree/serenity-reporter">wdi-ex-cucumber</a>
+    github repository, branch 'serenity-reporter'.</p>
+<hr>
+<h3>Integrate with other frameworks</h3>
+<h4>Serenity (bdd)</h4>
+<p>We choose to provide the necessary tools to integrate with serenity-bdd because we found its reporter very
+    complete.</p>
+<p>The integration is about</p>
+<ul>
+    <li>SerenityWebDriverProvider used to start the Serenity engine</li>
+    <li>serenityReporter that implements the WedDriver Overload Reporter</li>
+</ul>
+<p>Concrete implementation in <a href="https://github.com/simple4tests/wdi-ex-cucumber/tree/serenity-reporter">wdi-ex-cucumber</a>
+    github
+    repository, branch 'serenity-reporter'.</p>
