@@ -19,13 +19,20 @@ driver = new ChromeDriver();
 WebDriverInteractions wdi = new WebDriverInteractions(driver);
 {% endhighlight %}
 
-3. Just use it
+3a. Use WebDriver Interactions functions
 
 {% highlight java %}
-wdi.browser.navigateTo(...);
-wdi.click(...);
-wdi.set(...);
+wdi.browser.navigateTo(myUrl);
+wdi.click(buttonLocator);
+wdi.set(inputLocator, value);
 ...
+{% endhighlight %}
+
+3b. Use native WebDriver functions
+
+{% highlight java %}
+wdi.driver.getCurrentUrl();
+wdi.driver. ...
 {% endhighlight %}
 
 <h4>Recommended implementation</h4>

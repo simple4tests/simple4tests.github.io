@@ -25,6 +25,29 @@
   box-sizing: border-box;
 }
 
+.s4t-nav-items {
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+    li {
+      float: left;
+    }
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    li a:hover {
+      background-color: #111;
+    }
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -51,24 +74,6 @@ hr {
     border: 0;
     border-radius: 5px;
   }
-
-#skip-to-content {
-  height: 1px;
-  width: 1px;
-  position: absolute;
-  overflow: hidden;
-  top: -10px;
-
-  &:focus {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    height: auto;
-    width: auto;
-    background: invert($body-link-color);
-    outline: thick solid invert($body-link-color);
-  }
-}
 
 .btn {
   display: inline-block;
@@ -114,22 +119,22 @@ hr {
   }
 }
 
-.page-header {
+.s4t-header {
   color: $header-heading-color;
   text-align: center;
   background-color: $header-bg-color;
   background-image: linear-gradient(120deg, $header-bg-color-secondary, $header-bg-color);
 
   @include large {
-    padding: 5rem 6rem;
+    padding: 3rem 3rem;
   }
 
   @include medium {
-    padding: 3rem 4rem;
+    padding: 2rem 2rem;
   }
 
   @include small {
-    padding: 2rem 1rem;
+    padding: 1rem 1rem;
   }
 
     h1 {
@@ -167,41 +172,6 @@ hr {
       }
     }
 }
-
-// .project-name {
-//   margin-top: 0;
-//   margin-bottom: 0.1rem;
-//
-//   @include large {
-//     font-size: 3.25rem;
-//   }
-//
-//   @include medium {
-//     font-size: 2.25rem;
-//   }
-//
-//   @include small {
-//     font-size: 1.75rem;
-//   }
-// }
-
-// .project-tagline {
-//   margin-bottom: 2rem;
-//   font-weight: normal;
-//   opacity: 0.7;
-//
-//   @include large {
-//     font-size: 1.25rem;
-//   }
-//
-//   @include medium {
-//     font-size: 1.15rem;
-//   }
-//
-//   @include small {
-//     font-size: 1rem;
-//   }
-// }
 
 .main-content {
   word-wrap: break-word;
@@ -352,22 +322,25 @@ hr {
   }
 
   table {
-    display: block;
+    border-collapse: collapse;
     width: 100%;
-    overflow: auto;
-    word-break: normal;
-    word-break: keep-all; // For Firefox to horizontally scroll wider tables.
-    -webkit-overflow-scrolling: touch;
+//     border-spacing: 0;
+//     display: block;
+//     overflow: auto;
+//     word-break: normal;
+//     word-break: keep-all; // For Firefox to horizontally scroll wider tables.
+//     -webkit-overflow-scrolling: touch;
 
     th {
-      text-align:left;
       font-weight: bold;
     }
 
     th,
     td {
-      padding: 0.5rem 1rem;
+      text-align:left;
+      padding: 0.25rem 0.25rem;
       border: 1px solid $table-border-color;
+      font-size: 1rem;
 //       border: none;
     }
   }
