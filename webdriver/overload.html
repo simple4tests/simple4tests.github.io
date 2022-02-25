@@ -59,6 +59,59 @@ WebDriver Overload pagckage provides facilities to
     <li>"firefox_options_headless.yml" can be used for Firefox in headless mode</li>
 </ul>
 <hr>
+<h3>Report test details</h3>
+<p>We believe the reporting is a key success factor for test automation.</p>
+<p>There are two types of test details, everything from ghekin and the rest. There are several cucumber reporters
+    available and we recommend to use your favorite reporter for all information at gherkin level. By reporting test
+    details we mean showing additionnal usefull data about what is happening within a bdd step. Basically it is about
+    test steps, test data, test evidence and screenshots. all these information is in addition to the standard cucumber
+    reporters.</p>
+<p>WebDriver Overload commes with an abstract layer of the reporting to define common reporting functions as well as a
+    reporting implementation.</p>
+<h4>The Reporter, an abstract layer</h4>
+<p>The Reporter is an Interface object including default behaviour.</p>
+<ul>
+    <li>Errors book : Functions used to collect and report deviation detected during test executions</li>
+    <li>Reporting capabilities : List of reporting functions</li>
+    <li>Checks : Default checks implementation combining assertions, logging errors and sending everything to the reporter</li>
+</ul>
+<h4>Errors book</h4>
+<p>This list of errors allow to log deviation while executing the tests without throwing exception and stopping the test.</p>
+<p>Available functions are :</p>
+<ul>
+    <li>clearErrors() : removes all errors in the book</li>
+    <li>hasErrors() : returns true if there are errors in the book</li>
+    <li>getErrorsSummary() : returns the all content of the book as a String</li>
+    <li>throwAssertionErrorIfAny(boolean reportErrorsSummary) : if they are errors in the book an AssertionError is thrown and the test stops</li>
+</ul>
+<p>Errors are added to the book using the reportError() functions.</p>
+<h4>Reporting</h4>
+<p>Here under kind of reporting capabilities. Implemention will depends on the selected reporter.</p>
+<ul>
+    <li>reportAction(String action) : Report an action that represents what the automaton (as a user of the application) is doing in the application (ex: create an account)</li>
+    <li>reportData(String or Path data) : Report the data used when doing the action</li>
+    <li>reportCheck(String check) : Report a check that represents what we (as a tester) are verifying. It includes a screenshot.</li>
+    <li>reportError(String or Path error) : Report the error description that represents the mismatch between the actual and the expected value. It includes adding the error in the errors book.</li>
+</ul>
+<h4>Reporter implementations</h4>
+<h5>DummyReporter, less is nothing</h5>
+<p>This reports prints everything nowhere. It means the information is not accesible. However it can be used to manage
+    the error books and raised errors when found.</p>
+<p>Concrete implementation in <a href="https://github.com/simple4tests/wdi-ex-cucumber/tree/cucumber-dummy-reporter">wdi-ex-cucumber</a>
+    github repository, branch 'cucumber-dummy-reporter'.</p>
+<h5>SystemOutReporter, usefull logger</h5>
+<p>This reporter will report your desired information in the system out console. It can print every kind of data like
+    test steps, test data, deviations, error book. There is nothing about printscreens.</p>
+<p>Concrete implementation in <a
+        href="https://github.com/simple4tests/wdi-ex-cucumber/tree/cucumber-systemout-reporter">wdi-ex-cucumber</a>
+    github repository, branch 'cucumber-systemout-reporter'.</p>
+<h5>SerenityReporter, all in one reporter</h5>
+<p>Serenity reporter includes everything you need ... and much more. In addition to standard gherkin information
+    Serenity reporter provides capabilities to add step informations, step data, screenshots, tags, requirements,
+    capabilities, ...</p>
+<p>Concrete implementation in <a href="https://github.com/simple4tests/wdi-ex-cucumber/tree/serenity-reporter">wdi-ex-cucumber</a>
+    github repository, branch 'serenity-reporter'.</p>
+<hr>
 <h3>Perform (none blocking) checks</h3>
 <h4>Checks and none blocking checks?</h4>
 <p>Unit test best practices says we should check only one thing per test. Despite this is a good best practice in unit
@@ -88,7 +141,7 @@ WebDriver Overload pagckage provides facilities to
 </ul>
 <h4>Checks using Java Hamcrest Matchers</h4>
 {% highlight java %}
-reporter.addCheckData("Check page title", Automaton.getPageTitle(), Matchers.equalTo("Account creation"));
+reporter.assertThat("Check page title", Automaton.getPageTitle(), Matchers.equalTo("Account creation"));
 {% endhighlight %}
 <p>This function allow to describe expected value as Hamcrest Matchers expression.</p>
 <p>Some exemples</p>
@@ -100,52 +153,18 @@ reporter.addCheckData("Check page title", Automaton.getPageTitle(), Matchers.equ
 <p>Hamcrest Matchers support String, Integer, List, Object, ... A lot of documentation si available on internet.</p>
 <h4>Checks using Groovy Hamcrest Matchers</h4>
 {% highlight java %}
-reporter.addGroovyAssertThat("Check page title", Automaton.getPageTitle(), "equalTo('Account creation')");
+reporter.groovyAssertThat("Check page title", Automaton.getPageTitle(), "equalTo('Account creation')");
 {% endhighlight %}
 <p>This function allow to describe expected value as Hamcrest Matchers expression. The difference is, in this way the
     description is not a java function but a litteral. We can now describe checks on external files as String.</p>
 <p>To achieve it WebDriver Overload uses a groovy engine to evaluate the expression using 'assertThat' command.</p>
 <h4>Checks using Groovy power assertions</h4>
 {% highlight java %}
-reporter.addGroovyAssert("Check page title", String.format("'%s'.equals('Account creation')", Automaton.getPageTitle()));
+reporter.groovyAssert("Check page title", String.format("'%s'.equals('Account creation')", Automaton.getPageTitle()));
 {% endhighlight %}
 <p>This function allow to describe any groovy assert expression. Previously we used an object and an expression to
     compared with. Now we use a sinple expression.</p>
 <p>To achieve it WebDriver Overload uses a groovy engine to evaluate the expression using 'assert' command.</p>
-<hr>
-<h3>Report test details</h3>
-<p>We believe the reporting is a key success factor for test automation.</p>
-<p>There are two types of test details, everything from ghekin and the rest. There are several cucumber reporters
-    available and we recommend to use your favorite reporter for all information at gherkin level. By reporting test
-    details we mean showing additionnal usefull data about what is happening within a bdd step. Basically it is about
-    test steps, test data, test evidence and screenshots. all these information is in addition to the standard cucumber
-    reporters.</p>
-<p>WebDriver Overload commes with an abstract layer of the reporting to define common reporting functions as well as a
-    reporting implementation.</p>
-<h4>The Reporter, an abstract layer</h4>
-<p>The Reporter is an Interface object including default behaviour.</p>
-<ul>
-    <li>Error book : Functions used to collect and report deviation detected during test executions</li>
-    <li>Reporting capabilities : List of reporting functions, like reporting a step, reporting test data, ...</li>
-    <li>Checks : Default link between reporting engines and check engines</li>
-</ul>
-<h4>DummyReporter, less is nothing</h4>
-<p>This reports prints everything nowhere. It means the information is not accesible. However it can be used to manage
-    the error books and raised errors when found.</p>
-<p>Concrete implementation in <a href="https://github.com/simple4tests/wdi-ex-cucumber/tree/cucumber-dummy-reporter">wdi-ex-cucumber</a>
-    github repository, branch 'cucumber-dummy-reporter'.</p>
-<h4>SystemOutReporter, usefull logger</h4>
-<p>This reporter will report your desired information in the system out console. It can print every kind of data like
-    test steps, test data, deviations, error book. There is nothing about printscreens.</p>
-<p>Concrete implementation in <a
-        href="https://github.com/simple4tests/wdi-ex-cucumber/tree/cucumber-systemout-reporter">wdi-ex-cucumber</a>
-    github repository, branch 'cucumber-systemout-reporter'.</p>
-<h4>SerenityReporter, all in one reporter</h4>
-<p>Serenity reporter includes everything you need ... and much more. In addition to standard gherkin information
-    Serenity reporter provides capabilities to add step informations, step data, screenshots, tags, requirements,
-    capabilities, ...</p>
-<p>Concrete implementation in <a href="https://github.com/simple4tests/wdi-ex-cucumber/tree/serenity-reporter">wdi-ex-cucumber</a>
-    github repository, branch 'serenity-reporter'.</p>
 <hr>
 <h3>Integrate with other frameworks</h3>
 <h4>Serenity (bdd)</h4>
