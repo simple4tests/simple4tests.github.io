@@ -14,6 +14,11 @@ WebDriver Overload pagckage provides facilities to
     <li>Perform (none blocking) checks</li>
     <li>Integrate with other frameworks</li>
 </ul>
+<h3>Versions</h3>
+<ul>
+    <li>1.1.0 including package interactions-webdriver 1.1.0</li>
+</ul>
+<hr>
 <hr>
 <h3>Managing browsers options</h3>
 <h4>WebDriverProvider</h4>
@@ -145,13 +150,14 @@ WebDriver Overload pagckage provides facilities to
 <p>It consists of the following steps</p>
 <ul>
     <li>Add a new step in the report using the name of the check</li>
-    <li>Compares the actual value with the expected expression</li>
-    <ul>
-        <li>In case of match, continue running the test</li>
-        <li>In case of no match, reports the deviation as evidence or test data, logs the deviation in an error book for
-            futhur analyse and continue running the test
-        </li>
-    </ul>
+    <li>Compares the actual value with the expected expression
+        <ul>
+            <li>In case of match, continue running the test</li>
+            <li>In case of no match, reports the deviation as evidence or test data, logs the deviation in an error book
+                for futhur analyse and continue running the test
+            </li>
+        </ul>
+    </li>
 </ul>
 <h4>Checks using Java Hamcrest Matchers</h4>
 {% highlight java %}
