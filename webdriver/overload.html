@@ -5,14 +5,13 @@ description: Enforce test automation best practice
 ---
 
 <h3>Main purpose</h3>
-<p>WebDriver Overload is about introducing layers to standardize the code. On the top of it you can use provided
-    implementation or build your custom ones.</p>
-
+<p>WebDriver Overload is a set of libraries to support automation engineers when applying Simple Methodology. It can be
+    used out of the box or customized with your own implementation.</p>
 WebDriver Overload pagckage provides facilities to
 <ul>
     <li>Manage browsers options</li>
-    <li>Perform (none blocking) checks</li>
     <li>Report test details</li>
+    <li>Perform (none blocking) checks</li>
     <li>Integrate with other frameworks</li>
 </ul>
 <hr>
@@ -58,9 +57,13 @@ WebDriver Overload pagckage provides facilities to
     <li>"firefox_options_default.yml" will be used as default for Firefox</li>
     <li>"firefox_options_headless.yml" can be used for Firefox in headless mode</li>
 </ul>
+<h4>Custom configuration</h4>
+<p>You can provide your own configuration (ex : 'my_chrome_options'). Just copy/paste one of the existing configuration
+    and update it as you wish. To get a driver with your configuration, use WebDriver.get("chrome",
+    "C:/dev_tools/webdriver/chromedriver.exe", "my_chrome_options.yml").</p>
 <hr>
 <h3>Report test details</h3>
-<p>We believe the reporting is a key success factor for test automation.</p>
+<p>We believe the reporting is one of the key success factor for test automation.</p>
 <p>There are two types of test details, everything from ghekin and the rest. There are several cucumber reporters
     available and we recommend to use your favorite reporter for all information at gherkin level. By reporting test
     details we mean showing additionnal usefull data about what is happening within a bdd step. Basically it is about
@@ -73,25 +76,36 @@ WebDriver Overload pagckage provides facilities to
 <ul>
     <li>Errors book : Functions used to collect and report deviation detected during test executions</li>
     <li>Reporting capabilities : List of reporting functions</li>
-    <li>Checks : Default checks implementation combining assertions, logging errors and sending everything to the reporter</li>
+    <li>Checks : Default checks implementation combining assertions, logging errors and sending everything to the
+        reporter
+    </li>
 </ul>
 <h4>Errors book</h4>
-<p>This list of errors allow to log deviation while executing the tests without throwing exception and stopping the test.</p>
+<p>This list of errors allow to log deviation while executing the tests without throwing exception and stopping the
+    test.</p>
 <p>Available functions are :</p>
 <ul>
     <li>clearErrors() : removes all errors in the book</li>
     <li>hasErrors() : returns true if there are errors in the book</li>
     <li>getErrorsSummary() : returns the all content of the book as a String</li>
-    <li>throwAssertionErrorIfAny(boolean reportErrorsSummary) : if they are errors in the book an AssertionError is thrown and the test stops</li>
+    <li>throwAssertionErrorIfAny(boolean reportErrorsSummary) : if they are errors in the book an AssertionError is
+        thrown and the test stops
+    </li>
 </ul>
 <p>Errors are added to the book using the reportError() functions.</p>
 <h4>Reporting</h4>
 <p>Here under kind of reporting capabilities. Implemention will depends on the selected reporter.</p>
 <ul>
-    <li>reportAction(String action) : Report an action that represents what the automaton (as a user of the application) is doing in the application (ex: create an account)</li>
+    <li>reportAction(String action) : Report an action that represents what the automaton (as a user of the application)
+        is doing in the application (ex: create an account)
+    </li>
     <li>reportData(String or Path data) : Report the data used when doing the action</li>
-    <li>reportCheck(String check) : Report a check that represents what we (as a tester) are verifying. It includes a screenshot.</li>
-    <li>reportError(String or Path error) : Report the error description that represents the mismatch between the actual and the expected value. It includes adding the error in the errors book.</li>
+    <li>reportCheck(String check) : Report a check that represents what we (as a tester) are verifying. It includes a
+        screenshot.
+    </li>
+    <li>reportError(String or Path error) : Report the error description that represents the mismatch between the actual
+        and the expected value. It includes adding the error in the errors book.
+    </li>
 </ul>
 <h4>Reporter implementations</h4>
 <h5>DummyReporter, less is nothing</h5>
@@ -167,7 +181,7 @@ reporter.groovyAssert("Check page title", String.format("'%s'.equals('Account cr
 <p>To achieve it WebDriver Overload uses a groovy engine to evaluate the expression using 'assert' command.</p>
 <hr>
 <h3>Integrate with other frameworks</h3>
-<h4>Serenity (bdd)</h4>
+<h4>Serenity BDD</h4>
 <p>We choose to provide the necessary tools to integrate with serenity-bdd because we found its reporter very
     complete.</p>
 <p>The integration is about</p>
@@ -176,5 +190,4 @@ reporter.groovyAssert("Check page title", String.format("'%s'.equals('Account cr
     <li>serenityReporter that implements the WedDriver Overload Reporter</li>
 </ul>
 <p>Concrete implementation in <a href="https://github.com/simple4tests/wdi-ex-cucumber/tree/serenity-reporter">wdi-ex-cucumber</a>
-    github
-    repository, branch 'serenity-reporter'.</p>
+    github repository, branch 'serenity-reporter'.</p>
