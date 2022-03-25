@@ -13,7 +13,6 @@
             Includes functions to interact with the elements in a page as well as the following objects
             <ul>
                 <li>WebDriver</li>
-                <li>Browser</li>
                 <li>JavaScript</li>
                 <li>Wait</li>
             </ul>
@@ -22,10 +21,6 @@
     <tr>
         <td>WebDriver</td>
         <td>The WebDriver itself used for direct calls to WebDriver functions</td>
-    </tr>
-    <tr>
-        <td>Browser</td>
-        <td>Includes functions to interact with the browser</td>
     </tr>
     <tr>
         <td>JavaScript</td>
@@ -71,35 +66,36 @@
         <td>
             getInteractableElement(By by)
         </td>
+        <td>
+            Once interactable, return a WebElement matching the locator.<br>
+            Same as getInteractableElement(by, false, true, true)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            getInteractableElement(<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;By by,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;boolean waitUntilElementIsDisplayed,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;boolean waitUntilElementIsEnabled,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;boolean scrollIntoView)
+        </td>
         <td>Once interactable, return a WebElement matching the locator</td>
     </tr>
     <tr>
         <td>
             isElementPresent(By by)
         </td>
-        <td>Return true is there are more than 0 elements matching the locator</td>
+        <td>Return true is there are one or more elements matching the locator</td>
+    </tr>
+    <tr>
+        <td>
+            isElementAbsent(By by)
+        </td>
+        <td>Return true is there are 0 elements matching the locator</td>
     </tr>
     <tr>
         <td>countElements(By by)</td>
         <td>Return the number of elements matching the locator</td>
-    </tr>
-    <tr>
-        <td>getText(By by)</td>
-        <td>
-            <p>Once present, return the text of an element</p>
-            Selenium : WebElement.getText()
-        </td>
-    </tr>
-    <tr>
-        <td>
-            String getAttribute(<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;By by,<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;String attribute)
-        </td>
-        <td>
-            <p>Once present, return the attribute's value of an element</p>
-            Selenium : WebElement.getAttribute()
-        </td>
     </tr>
 </table>
 <h4>Interact with elements</h4>
@@ -109,8 +105,28 @@
         <th>Description</th>
     </tr>
     <tr>
-        <td>clear(By by)</td>
-        <td>Once interactable, clear input and textarea element matching the locator</td>
+        <td>click(By by)</td>
+        <td>
+            <p>Once interactable, click on the element matching the locator</p>
+            Selenium : WebElement.click()
+        </td>
+    </tr>
+    <tr>
+        <td>doubleClick(By by)</td>
+        <td>
+            <p>Once interactable, double click on the element matching the locator</p>
+            Selenium : n/a
+        </td>
+    </tr>
+    <tr>
+        <td>
+            alwaysClear(boolean alwaysClear)<br>
+            setClearOption(boolean alwaysClear)
+        </td>
+        <td>
+            <p>If set to true, the set() function will always clear the element before setting the new value.</p>
+            <b>Default is false</b> (do not clear before setting the value).
+        </td>
     </tr>
     <tr>
         <td>clear()</td>
@@ -127,13 +143,8 @@
         </td>
     </tr>
     <tr>
-        <td>
-            setClearOption(boolean alwaysClear)
-        </td>
-        <td>
-            <p>If set to true, the set() function will always clear the element before setting the new value.</p>
-            <b>Default is false</b> (do not clear before setting the value).
-        </td>
+        <td>clear(By by)</td>
+        <td>Once interactable, clear input and textarea element matching the locator</td>
     </tr>
     <tr>
         <td>
@@ -147,40 +158,6 @@
         </td>
     </tr>
     <tr>
-        <td>select(By by, Boolean value)</td>
-        <td>
-            <p>Once interactable, set the property 'selected' of an (checkbox, radio btn) element </p>
-            Selenium : WebElement.click()
-        </td>
-    </tr>
-    <tr>
-        <td>
-            selectByVisibleText(<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;By by,<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;String text)
-        </td>
-        <td>
-            <p>Once interactable, select a value in a dropdown list</p>
-            Selenium : Select().selectByVisibleText()
-        </td>
-    </tr>
-    <tr>
-        <td>
-            getSelect(By by)
-        </td>
-        <td>
-            <p>Once interactable, get a Select element (representing a dropdown list)</p>
-            Selenium : new Select()
-        </td>
-    </tr>
-    <tr>
-        <td>click(By by)</td>
-        <td>
-            <p>Once interactable, click on the element matching the locator</p>
-            Selenium : WebElement.click()
-        </td>
-    </tr>
-    <tr>
         <td>
             upload(<br>
             &nbsp;&nbsp;&nbsp;&nbsp;By by,<br>
@@ -191,17 +168,46 @@
             Selenium : WebElement.sendkeys()
         </td>
     </tr>
+    <tr>
+        <td>select(By by, Boolean value)</td>
+        <td>
+            <p>Once interactable, set the property 'selected' of an (checkbox, radio btn) element </p>
+            Selenium : WebElement.click()
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Select getSelectWithVisibleText(<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;By by,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;String visibleText)<br>
+            Select getSelectWithValue(<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;By by,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;String value)<br>
+            Select getSelectWithIndex(<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;By by,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;int index)<br>
+            Select getSelect(By by)
+        </td>
+        <td>
+            <p>Once interactable, optionaly with a property present, return a Select</p>
+            Selenium : new Select()
+        </td>
+    </tr>
 </table>
-<h4>Frame functions</h4>
+<h4>Others functions</h4>
 <table>
     <tr>
         <th style="width: 30%;">Name</th>
         <th>Description</th>
     </tr>
     <tr>
-        <td>switchToMainFrame()</td>
+        <td>getAlert()</td>
+        <td>One present, return the alert element</td>
+    </tr>
+    <tr>
+        <td>switchToDefaultContent()</td>
         <td>
-            <p>Switch to the main frame of the current page</p>
+            <p>Switch to the default content (top of the page) of the current page</p>
             Selenium : driver.switchTo().defaultContent()
         </td>
     </tr>
@@ -224,26 +230,19 @@
         <td>switchToFrame(String nameOrId)</td>
         <td>Once available, switch to the frame identified by its name or ID</td>
     </tr>
-</table>
-<hr>
-<h3>Browser functions</h3>
-<table>
     <tr>
-        <th style="width: 30%;">Name</th>
-        <th>Description</th>
-    </tr>
-    <tr>
+        <td>switchToTab(int index)</td>
         <td>
-            Browser(<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;WebDriver driver,<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Wait wait,<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;JavaScript javaScript)
+            <p>Once present, show tab with the given index</p>
+            Selenium : driver.switchTo().window()
         </td>
-        <td>Public constructor</td>
     </tr>
     <tr>
-        <td>getAlert()</td>
-        <td>One present, return the alert element</td>
+        <td>closeTab()</td>
+        <td>
+            <p>Close current tab</p>
+            Selenium : driver.close()
+        </td>
     </tr>
     <tr>
         <td>
@@ -282,27 +281,6 @@
         </td>
         <td>Call the scrollIntoView function with custom settings</td>
     </tr>
-    <tr>
-        <td>switchToFirstTab()</td>
-        <td>
-            Show tab with the index 0<br>
-            Selenium : driver.switchTo().window()
-        </td>
-    </tr>
-    <tr>
-        <td>switchToTab(int index)</td>
-        <td>
-            <p>Once present, show tab with the given index</p>
-            Selenium : driver.switchTo().window()
-        </td>
-    </tr>
-    <tr>
-        <td>closeTab()</td>
-        <td>
-            <p>Close current tab</p>
-            Selenium : driver.close()
-        </td>
-    </tr>
 </table>
 <hr>
 <h3>Wait functions</h3>
@@ -336,7 +314,7 @@
         <td>List exceptions to be ignored when performing the checks</td>
     </tr>
     <tr>
-        <td>catchTimeoutException()</td>
+        <td>ignoreTimeoutException()</td>
         <td>
             <p>By default the engine wait for a condition that must be realized.
                 If not, there is a failure and the test stops with failed status.
@@ -362,7 +340,7 @@
         <td>Wait for the element to be present</td>
     </tr>
     <tr>
-        <td>elementNotToBePresent(By by)</td>
+        <td>elementToBeAbsent(By by)</td>
         <td>Wait for the element not to be present</td>
     </tr>
     <tr>
@@ -381,11 +359,20 @@
     </tr>
     <tr>
         <td>
-            <b>static</b> until(<br>
+            until(<br>
             &nbsp;&nbsp;&nbsp;&nbsp;Function expectedCondition,<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;WebDriver driver)
+            &nbsp;&nbsp;&nbsp;&nbsp;final Duration interval,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;final Duration timeout)<br>
+            until(<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Function expectedCondition,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;final Collection ignoredExceptions)<br>
+            until(<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Function expectedCondition,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;final Duration interval,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;final Duration timeout,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;final Collection ignoredExceptions)<br>
         </td>
-        <td>Wait for the expectedCondition with default settings and return the result of the expectedCondition</td>
+        <td>Wait for the expectedCondition with specific settings and return the result of the expectedCondition</td>
     </tr>
     <tr>
         <td>
@@ -394,7 +381,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;WebDriver driver,<br>
             &nbsp;&nbsp;&nbsp;&nbsp;Duration interval,<br>
             &nbsp;&nbsp;&nbsp;&nbsp;Duration timeout,<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Collection exceptions)
+            &nbsp;&nbsp;&nbsp;&nbsp;Collection ignoredExceptions)
         </td>
         <td>Wait for the expectedCondition with custom settings and return the result of the expectedCondition</td>
     </tr>

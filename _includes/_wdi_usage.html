@@ -22,15 +22,15 @@ WebDriverInteractions wdi = new WebDriverInteractions(driver);
 3a. Use WebDriver Interactions functions
 
 {% highlight java %}
-wdi.browser.navigateTo(myUrl);
 wdi.click(buttonLocator);
 wdi.set(inputLocator, value);
-...
+wdi. ...
 {% endhighlight %}
 
 3b. Use native WebDriver functions
 
 {% highlight java %}
+wdi.driver.navivate().to(myUrl);
 wdi.driver.getCurrentUrl();
 wdi.driver. ...
 {% endhighlight %}
@@ -58,7 +58,7 @@ WebDriver driver;
 driver = new ChromeDriver();
 ...
 Wdi wdi = new Wdi(driver);
-wdi.browser.navigateTo(...);
+wdi.driver.navivate().to(...);
 wdi.click(...);
 wdi.set(...);
 wdi.selectInList(by, value);
