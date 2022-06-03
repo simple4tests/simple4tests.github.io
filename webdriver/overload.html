@@ -9,7 +9,7 @@ description: Enforce test automation best practice
     used out of the box or customized with your own implementation.</p>
 WebDriver Overload pagckage provides facilities to
 <ul>
-    <li>Manage browsers options</li>
+    <li>WebDriver & Options providers</li>
     <li>Report test details</li>
     <li>Perform (none blocking) checks</li>
     <li>Integrate with other frameworks</li>
@@ -17,11 +17,11 @@ WebDriver Overload pagckage provides facilities to
 <hr>
 <h3>Versions</h3>
 <ul>
-    <li>1.2.1 including package interactions-webdriver 1.2.1</li>
+    <li>2.0.0 including new Reliable elements for Reliable actions</li>
 </ul>
 <hr>
-<h3>Managing browsers options</h3>
-<h4>WebDriverProvider</h4>
+<h3>WebDriver & Options providers</h3>
+<h4>DriverProvider</h4>
 <p> A simple WebDriver provider for chrome (default) and firefox supporting local and grid.</p>
 <p> For local WebDrivers [static WebDriver get(String browser, Path driverPath, String optionsAsYamlResource)] the
     parameters are</p>
@@ -48,7 +48,7 @@ WebDriver Overload pagckage provides facilities to
 </ul>
 <h4>FirefoxOptionsProvider</h4>
 <p>The static get function returns a ChromeOptions object based on options given in parameter.</p>
-<p>FirefoxOptionsProvider supports arguments, capabilities, preferences and profile preferences.</p>
+<p>FirefoxOptionsProvider supports binary location, arguments, capabilities, preferences and profile preferences and extensions.</p>
 <ul>
     <li>static FirefoxOptions get() will return default Firefox options</li>
     <li>static FirefoxOptions get(String optionsAsYamlResource) will return Firefox options based on what is specified
@@ -113,23 +113,18 @@ WebDriver Overload pagckage provides facilities to
     </li>
 </ul>
 <h4>Reporter implementations</h4>
-<h5>DummyReporter, less is nothing</h5>
-<p>This reports prints everything nowhere. It means the information is not accesible. However it can be used to manage
-    the error books and raised errors when found.</p>
-<p>Concrete implementation in <a href="https://github.com/simple4tests/wdi-ex-cucumber/tree/cucumber-dummy-reporter">wdi-ex-cucumber</a>
-    github repository, branch 'cucumber-dummy-reporter'.</p>
 <h5>SystemOutReporter, usefull logger</h5>
 <p>This reporter will report your desired information in the system out console. It can print every kind of data like
     test steps, test data, deviations, error book. There is nothing about printscreens.</p>
 <p>Concrete implementation in <a
-        href="https://github.com/simple4tests/wdi-ex-cucumber/tree/cucumber-systemout-reporter">wdi-ex-cucumber</a>
-    github repository, branch 'cucumber-systemout-reporter'.</p>
+        href="https://github.com/simple4tests/ohrm-tests/tree/cucumber-systemout">ohrm-tests</a>
+    github repository, branch 'cucumber-systemout'.</p>
 <h5>SerenityReporter, all in one reporter</h5>
 <p>Serenity reporter includes everything you need ... and much more. In addition to standard gherkin information
     Serenity reporter provides capabilities to add step informations, step data, screenshots, tags, requirements,
     capabilities, ...</p>
-<p>Concrete implementation in <a href="https://github.com/simple4tests/wdi-ex-cucumber/tree/serenity-reporter">wdi-ex-cucumber</a>
-    github repository, branch 'serenity-reporter'.</p>
+<p>Concrete implementation in <a href="https://github.com/simple4tests/ohrm-tests/tree/main">ohrm-tests</a>
+    github repository, branch 'main'.</p>
 <hr>
 <h3>Perform (none blocking) checks</h3>
 <h4>Checks and none blocking checks?</h4>
@@ -195,5 +190,5 @@ reporter.groovyAssert("Check page title", String.format("'%s'.equals('Account cr
     <li>SerenityDriver used to start the Serenity engine</li>
     <li>serenityReporter that implements the WedDriver Overload Reporter</li>
 </ul>
-<p>Concrete implementation in <a href="https://github.com/simple4tests/wdi-ex-cucumber/tree/serenity-reporter">wdi-ex-cucumber</a>
-    github repository, branch 'serenity-reporter'.</p>
+<p>Concrete implementation in <a href="https://github.com/simple4tests/ohrm-tests/tree/main">ohrm-tests</a>
+    github repository, branch 'main'.</p>

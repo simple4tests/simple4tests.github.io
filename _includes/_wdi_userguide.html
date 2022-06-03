@@ -13,7 +13,7 @@
             Includes functions to interact with the elements in a page as well as the following objects
             <ul>
                 <li>WebDriver</li>
-                <li>JavaScript</li>
+                <li>JavascriptExecutor</li>
                 <li>Wait</li>
             </ul>
         </td>
@@ -23,8 +23,8 @@
         <td>The WebDriver itself used for direct calls to WebDriver functions</td>
     </tr>
     <tr>
-        <td>JavaScript</td>
-        <td>Single function to execute javascript</td>
+        <td>JavascriptExecutor</td>
+        <td>A JavascriptExecutor object to execute javascript</td>
     </tr>
     <tr>
         <td>Wait</td>
@@ -82,20 +82,20 @@
         <td>Once interactable, return a WebElement matching the locator</td>
     </tr>
     <tr>
+        <td>count(By by)</td>
+        <td>Return the number of elements matching the locator</td>
+    </tr>
+    <tr>
         <td>
-            isElementPresent(By by)
+            isPresent(By by)
         </td>
         <td>Return true is there are one or more elements matching the locator</td>
     </tr>
     <tr>
         <td>
-            isElementAbsent(By by)
+            isAbsent(By by)
         </td>
         <td>Return true is there are 0 elements matching the locator</td>
-    </tr>
-    <tr>
-        <td>countElements(By by)</td>
-        <td>Return the number of elements matching the locator</td>
     </tr>
 </table>
 <h4>Interact with elements</h4>
@@ -112,7 +112,7 @@
         </td>
     </tr>
     <tr>
-        <td>doubleClick(By by)</td>
+        <td>dblclick(By by)</td>
         <td>
             <p>Once interactable, double click on the element matching the locator</p>
             Selenium : n/a
@@ -120,26 +120,23 @@
     </tr>
     <tr>
         <td>
-            alwaysClear(boolean alwaysClear)<br>
-            setClearOption(boolean alwaysClear)
+            clearAll(boolean alwaysClear)
         </td>
         <td>
-            <p>If set to true, the set() function will always clear the element before setting the new value.</p>
+            <p>If true, sendKeys() will always clear the element before setting the new value.</p>
             <b>Default is false</b> (do not clear before setting the value).
         </td>
     </tr>
     <tr>
-        <td>clear()</td>
+        <td>clearNext(boolean alwaysClear)</td>
         <td>
-            <p>By default input and textarea elements are not cleared before setting a value.
-                Some times we need to clear the element to avoid the values to be concatenated.</p>
-            <p>This function configure the set function to clear the element before setting the new value.</p>
+            <p>This function configure the next call to sendKeys() to clear or not the element before setting the new value.</p>
             <p>Return a WebDriverInteractions object</p>
             <ul>
-                <li>Set the value : set(by, value)</li>
-                <li>Clear and set the value : clear().set(by, value)</li>
+                <li>Assuming clearall = false, set the value : sendKeys(by, value)</li>
+                <li>Assuming clearall = false, clear and set the value : clearNext(true).sendKeys(by, value)</li>
             </ul>
-            <b><i>The call of this function affects only the first following set action</i></b>
+            <b><i>The call of this function affects only the first following sendKeys() action</i></b>
         </td>
     </tr>
     <tr>
@@ -148,7 +145,7 @@
     </tr>
     <tr>
         <td>
-            set(<br>
+            sendKeys(<br>
             &nbsp;&nbsp;&nbsp;&nbsp;By by,<br>
             &nbsp;&nbsp;&nbsp;&nbsp;CharSequence... value)
         </td>
@@ -169,7 +166,7 @@
         </td>
     </tr>
     <tr>
-        <td>select(By by, Boolean value)</td>
+        <td>setSelected(By by, Boolean value)</td>
         <td>
             <p>Once interactable, set the property 'selected' of an (checkbox, radio btn) element </p>
             Selenium : WebElement.click()
@@ -177,20 +174,20 @@
     </tr>
     <tr>
         <td>
-            Select getSelectWithVisibleText(<br>
+            Select getSelect(By by)<br>
+            selectByVisibleText(<br>
             &nbsp;&nbsp;&nbsp;&nbsp;By by,<br>
             &nbsp;&nbsp;&nbsp;&nbsp;String visibleText)<br>
-            Select getSelectWithValue(<br>
+            selectByValue(<br>
             &nbsp;&nbsp;&nbsp;&nbsp;By by,<br>
             &nbsp;&nbsp;&nbsp;&nbsp;String value)<br>
-            Select getSelectWithIndex(<br>
+            selectByIndex(<br>
             &nbsp;&nbsp;&nbsp;&nbsp;By by,<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;int index)<br>
-            Select getSelect(By by)
+            &nbsp;&nbsp;&nbsp;&nbsp;int index)
         </td>
         <td>
-            <p>Once interactable, optionaly with a property present, return a Select</p>
-            Selenium : new Select()
+            <p>Once interactable, return a Select or perform the corresponding action</p>
+            Selenium : new Select(by) or new Select(by).xxx
         </td>
     </tr>
 </table>
@@ -336,14 +333,6 @@
         </td>
     </tr>
     <tr>
-        <td>elementToBePresent(By by)</td>
-        <td>Wait for the element to be present</td>
-    </tr>
-    <tr>
-        <td>elementToBeAbsent(By by)</td>
-        <td>Wait for the element not to be present</td>
-    </tr>
-    <tr>
         <td>until(Function expectedCondition)</td>
         <td>
             <p>This functions wait for the expectedCondition to be relazided and return the result of the
@@ -384,34 +373,5 @@
             &nbsp;&nbsp;&nbsp;&nbsp;Collection ignoredExceptions)
         </td>
         <td>Wait for the expectedCondition with custom settings and return the result of the expectedCondition</td>
-    </tr>
-</table>
-<hr>
-<h3>JavaScript functions</h3>
-<table>
-    <tr>
-        <th style="width: 30%;">Name</th>
-        <th>Description</th>
-    </tr>
-    <tr>
-        <td>JavaScript(WebDriver driver)</td>
-        <td>Public constructor</td>
-    </tr>
-    <tr>
-        <td>
-            execute(<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;String script,<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Object... args)
-        </td>
-        <td>Execute a script using a JavaScriptExecutor</td>
-    </tr>
-    <tr>
-        <td>
-            <b>static</b> void execute(<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;WebDriver driver,<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;String script,<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Object... args)
-        </td>
-        <td>Execute a script using a JavaScriptExecutor</td>
     </tr>
 </table>

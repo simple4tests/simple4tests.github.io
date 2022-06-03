@@ -22,8 +22,8 @@ WebDriverInteractions wdi = new WebDriverInteractions(driver);
 3a. Use WebDriver Interactions functions
 
 {% highlight java %}
-wdi.click(buttonLocator);
-wdi.set(inputLocator, value);
+wdi.click(by);
+wdi.sendKeys(by,value);
 wdi. ...
 {% endhighlight %}
 
@@ -32,6 +32,7 @@ wdi. ...
 {% highlight java %}
 wdi.driver.navivate().to(myUrl);
 wdi.driver.getCurrentUrl();
+wdi.driver.findElement(by);
 wdi.driver. ...
 {% endhighlight %}
 
@@ -41,11 +42,11 @@ wdi.driver. ...
     customize WebDriverInteractions creating your custom technical actions based on WebDriverInteractions.</p>
 
 {% highlight java %}
-public class Wdi extends WebDriverInteractions {
-public Wdi(WebDriver driver) { super(driver); }
+public class MyWebDriverInteractions extends WebDriverInteractions {
+    public MyWebDriverInteractions(WebDriver driver) { super(driver); }
 
-// custom technical action to select a value within a custom dropdown
-public void selectInList(By by, String value) {... click(...); ...; click(...); ...}
+    // custom technical action to select a value within a custom dropdown
+    public void selectInList(By by, String value) {... doSomething(); ...}
 }
 {% endhighlight %}
 
@@ -57,10 +58,10 @@ WebDriver driver;
 ...
 driver = new ChromeDriver();
 ...
-Wdi wdi = new Wdi(driver);
-wdi.driver.navivate().to(...);
-wdi.click(...);
-wdi.set(...);
-wdi.selectInList(by, value);
+MyWebDriverInteractions wdi = new MyWebDriverInteractions(driver);
+wdi.driver.navivate().to(url);
+wdi.click(by);
+wdi.sendKeys(by,value);
+wdi.selectInList(by,value);
 ...
 {% endhighlight %}
